@@ -60,14 +60,14 @@
             <div class="card-body">
                 <h5 class="card-title title_produit">{{$product->libelle}}</h5>
                 <input type="text" class="title_produit" id="title_produit_{{$product->id_product}}" value={{$product->libelle}} hidden >
-                <input type="text" class="id_produit" id="id_produit_{{$product->id_product}}" value="{{$product->id_product}}" hidden >
+                <input type="text" class="id_produit" name="id_product" id="id_produit_{{$product->id_product}}" value="{{$product->id_product}}" hidden >
             </div>
           <div class="card-footer d-flex justify-content-between card_details">
                 <p value="">{{$product->prix}}</p>
                 <input type="text" class="prix_produit" id="prix_produit_{{$product->id_product}}" value="{{$product->prix}}" hidden>
                 <ul class="pagination pagination-sm d-flex justify-content-center"> 
                 <li class="page-item position-absolute mr-3 check_produit"><a class="page-link"><i class="fas fa-check text-danger"></i></a></li> 
-                <li class="page-item position-absolute mr-3 add_produit" onclick="selectProduit(this,{{$product->id_product}})"><a class="page-link" ><i class="fas fa-plus text-danger"></i></a></li>                                                         
+                <li class="page-item position-absolute mr-3 add_produit" onclick="selectProduit(this,{{$product->id_product}})"><a class="page-link" href="/card/add/{{$product->id_product}}"><i class="fas fa-plus text-danger"></i></a></li>                                                         
                 </ul>
     
           </div>

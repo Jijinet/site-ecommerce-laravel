@@ -97,6 +97,10 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
+
+            @if(session()->get('cart') != null)
+                    <form method="POST" action="/card/validate">
                     <table class="table table-hover w-100">
                         <thead>
                             <tr>
@@ -107,27 +111,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                       
+               
+            @foreach (session()->get('cart') as $pro )
+     
+                <tr class="align-self-center" class="card_element">
+                  <th scope="row" class="w-50 p_name">{{$pro['product']->get(0)->libelle}}</th> 
+                    <input  value="{{$pro['product']->get(0)->id_product}}" hidden>
+                  <td class="p_prix" >{{$pro['product']->get(0)->prix*$pro['qty']}}</td>
+                    <input type="text" class="border rounded w-25 p_price" value="{{$pro['product']->get(0)->prix}}" hidden>
+                  <td><p class="w-25 p_qte">{{$pro['qty']}}</p></td>
+                  <td><button type="button" class="btn btn-danger btn_remove"><a  href="/card/remove/{{$pro['product']->get(0)->id_product}}">Remove</a></button></td>
+                </tr>
+
+            @endforeach
+         
                         </tbody>
                         <tfoot>
                         <tr class="border-0">
                         <th scope="col">Prix total</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
-                                <th scope="col" class="total"></th>
+                                <th scope="col" class="total">{{session()->get('total')}}</th>
                         </tr> 
                         </tfoot>
                     </table>
-                    <p class="py-5 text-center font-weight-bold empty">Your card is empty!</p>
-                   
                     <div class="modal-footer d-flex justify-content-between">
                        <p class='checkout_msg'></p>
                         <div>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-success valider" onclick="checkout();">Valider</button>
+                          <button type="submit" class="btn btn-success valider" onclick="checkout();"><a>Valider</a></button>
                         </div>
                        
                     </div>
+                    </from>
+                  @else
+                    
+                    <p class="py-5 text-center font-weight-bold empty">Your card is empty!</p>
+                  @endif
+                    
                 </div>
 
             </div>
@@ -136,3 +157,4 @@
 
 
     </div>
+

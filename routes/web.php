@@ -19,7 +19,13 @@ Route::get('/category_products/{id_category}', 'ProductController@listCategoryPr
 Route::get('/products/asc', 'ProductController@listProductsAsc');
 Route::get('/products/desc', 'ProductController@listProductsDesc');
 Route::get('/products/search', 'ProductController@listSearchedProducts');
+Route::get('/card/add/{id_product}', 'ProductController@getOneProduct');
+Route::get('/card/remove/{id_product}', 'ProductController@removeOneProduct');
+Route::post('/card/validate', 'ProductController@getOneProduct');
 Route::get('/', 'ProductController@listProducts');
+
+
 
 Route::post('/client/add', 'ClientController@addClient');
 Route::post('/client/auth', 'ClientController@authClient');
+Route::get('/client/logout', 'ClientController@logoutClient');

@@ -17,12 +17,13 @@ class Client extends Model
 
     public function getClient($email,$password){
 
-        $clients=DB::table('clients')
+        $client = DB::table('clients')
         ->where('email',"like",$email)
         ->where('password','like',$password)
         ->get();
-        return $clients;
+        return $client;
 
     }
+
     
 }

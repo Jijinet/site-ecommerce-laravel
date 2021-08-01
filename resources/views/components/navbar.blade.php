@@ -19,25 +19,34 @@
 
             <div class="dropdown show">
               <div class="user_div">
-              @foreach($clients as $client)
+             
               <a class="dropdown-toggle account ml-n4 display-5 username" href="#"  role="button" id="dropdownMenuLink"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{$client->nom}}
+                   {{ session()->get('client') != null ? session()->get('client')->get(0)->nom : 'Account'}} 
                 </a>
-            @endforeach
+     
 
                 <div class="dropdown-menu account_menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item drop_login" data-toggle="modal" data-target="#loginModal" >Login</a>
+                @if(session()->get('client') == null)
+                    <a class="dropdown-item drop_login" data-toggle="modal" data-target="#loginModal" >Login</a>                    
                     <a class="dropdown-item drop_register" data-toggle="modal" data-target="#registerModal" >Register</a>
+                @else   
+                    <a class="dropdown-item drop_register" href="/client/logout">Logout</a>
+                @endif
                 </div>
             </div>
           </div>
                 <!-- Button trigger cart modal -->
                 <a href="#" data-toggle="modal" class="basket" data-target=".bd-example-modal-lg">
                     <i class="fas fa-shopping-basket text-dark ml-4"></i>                   
-                    <span class="badge badge-danger badge-pill ml-2 num_produit">0</span>
+                    <span class="badge badge-danger badge-pill ml-2 num_produit">{{session()->get('count')}}</span>
                 </a>
             </div>
 
 
         </div>
+
+            
+  
+
+       

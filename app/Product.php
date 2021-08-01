@@ -76,4 +76,12 @@ class Product extends Model
         return $products;
 
     }
+
+    public function getProduct($id_product){
+        $product = DB::table('products')
+        ->where('products.id_product','=',$id_product)
+        ->get();
+
+        return $product;
+    }
 }

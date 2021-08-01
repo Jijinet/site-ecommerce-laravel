@@ -37,7 +37,6 @@ class ClientController extends Controller
     }
 
     public function authClient(Request $request){
-        $data=[];
 
         if($request->isMethod('post')){
             
@@ -45,20 +44,27 @@ class ClientController extends Controller
             $email=$request->input('email');
             $password=$request->input('password');
             
-            $request->session()->put('data',$this->client->getClient($email,$password));
+            $client = $this->client->getClient($email,$password);
+            $request->session()->put('client', $client);
 
-            if($request->session()->has('data')){
-                $data['clients']=$request->session()->get('data');
-
-            }
+            if($client != null){
                 return redirect('/');
-                dd($data['clients']);
-        
+            } else{
+                
+            }
+                
             }
 
+            return view('index');
+        
+    }
 
-        return view('index',$data);
+    public function logoutClient(Request $request){
 
+        $request->session()->forget('client');
+        return redirect('/');
+        return view('index');
+        
     }
 
 }

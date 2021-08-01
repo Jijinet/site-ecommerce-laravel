@@ -70,6 +70,11 @@
     .search-box .btn{
         border-radius: 0;
     }
+
+    .btn a{
+        color: white;
+    }
+
     
     
     
