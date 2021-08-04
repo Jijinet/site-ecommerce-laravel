@@ -20,13 +20,17 @@ class ProductController extends Controller
         $data=[];
         $data['products']=$this->products->getProducts();
         $data['categories']=$this->categories->getCategories();
+        $data['title']='All Products';
         return view('index',$data);
     }
 
     public function listCategoryProducts($id_category){
+        
         $data=[];
         $data['categories']=$this->categories->getCategories();
-        $data['products']=$this->products->getCategoryProducts($id_category);
+        $data['products']=$this->products->getCategoryProducts($id_category); 
+        $data['libelle']=$this->categories->getCategoriesLabel($id_category);
+        $data['title']=$data['libelle']->get(0)->libelle;
         return view('index',$data);
     }
 
@@ -56,8 +60,7 @@ class ProductController extends Controller
 
         $product=$this->products->getProduct($id_product);
         $cart = Session::get('cart');
-
-        // $subTotal=0;
+        $count=0;
         $total=0;
 
         if(empty($cart[$id_product])){
@@ -68,7 +71,7 @@ class ProductController extends Controller
                 
             );
             $total=0;
-     
+            $count=0;
 
         } else{
            
@@ -91,9 +94,7 @@ class ProductController extends Controller
         Session::put('count', $count);
         Session::put('total', $total);
 
-        // dd($cart);
-        // dd(Session::get('total'));
-        // dd(Session::get('total'));
+     
         return redirect()->back();
         return view('index');
 

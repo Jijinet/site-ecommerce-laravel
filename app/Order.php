@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class Order extends Model
 {
+
+    protected $fillable=['id_client','montant'];
+
     public function client(){
         return $this->belongsTo('App\Client');
     }
@@ -18,4 +23,15 @@ class Order extends Model
             'id_product');
     
     }
+
+    public function getOrder($id_client){
+
+        $order=DB::table('orders')
+        ->where('orders.id_client','=',$id_client)
+        ->orderBy('id','desc')
+        ->get();
+        return $order;
+    }
+
+    
 }

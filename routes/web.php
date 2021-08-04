@@ -21,7 +21,7 @@ Route::get('/products/desc', 'ProductController@listProductsDesc');
 Route::get('/products/search', 'ProductController@listSearchedProducts');
 Route::get('/card/add/{id_product}', 'ProductController@getOneProduct');
 Route::get('/card/remove/{id_product}', 'ProductController@removeOneProduct');
-Route::post('/card/validate', 'ProductController@getOneProduct');
+Route::post('/card/validate', 'OrderController@addOrder');
 Route::get('/', 'ProductController@listProducts');
 
 

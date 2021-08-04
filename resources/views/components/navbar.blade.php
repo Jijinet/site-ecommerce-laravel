@@ -6,7 +6,7 @@
 
 
             <div class="col-12 col-lg-2">
-                <a class="navbar-brand" rel="icon" href="index.php">
+                <a class="navbar-brand" rel="icon" href="/">
                     <img src="{{asset('images/logo.png')}}"  class="ml-4" alt=""></a>
             </div>
             <div class="col-12 col-lg-6 align-self-center search-box">
@@ -39,7 +39,7 @@
                 <!-- Button trigger cart modal -->
                 <a href="#" data-toggle="modal" class="basket" data-target=".bd-example-modal-lg">
                     <i class="fas fa-shopping-basket text-dark ml-4"></i>                   
-                    <span class="badge badge-danger badge-pill ml-2 num_produit">{{session()->get('count')}}</span>
+                    <span class="badge badge-danger badge-pill ml-2 num_produit">{{session()->get('count') != null ? session()->get('count') : 0 }}</span>
                 </a>
             </div>
 

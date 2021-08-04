@@ -30,8 +30,7 @@ class Product extends Model
     public function getProducts(){
 
         $products=DB::table('products')
-        ->take(12)
-        ->get();
+        ->paginate(12);
         return $products;
 
     }
@@ -41,8 +40,7 @@ class Product extends Model
         $products = DB::table('products')
         ->join('product_categories','product_categories.id_product','=','products.id_product')
         ->where('product_categories.id_category','=',$id_category)
-        ->limit(12)
-        ->get();
+        ->paginate(12);
         return $products;
     }
 
@@ -50,8 +48,7 @@ class Product extends Model
 
         $products=DB::table('products')
         ->orderBy('prix','asc')
-        ->take(12)
-        ->get();
+        ->paginate(12);
         return $products;
 
     }
@@ -60,9 +57,8 @@ class Product extends Model
 
         $products=DB::table('products')
         ->orderBy('prix','desc')
-        ->take(12)
         ->skip(45)
-        ->get();
+        ->paginate(12);
         return $products;
 
     }
@@ -71,8 +67,7 @@ class Product extends Model
 
         $products=DB::table('products')
         ->where('libelle','like',"%$libelle%")
-        ->take(12)
-        ->get();
+        ->paginate(12);
         return $products;
 
     }
@@ -81,7 +76,7 @@ class Product extends Model
         $product = DB::table('products')
         ->where('products.id_product','=',$id_product)
         ->get();
-
         return $product;
     }
+
 }

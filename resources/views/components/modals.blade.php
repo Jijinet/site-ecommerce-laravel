@@ -44,7 +44,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" action="client/add">
+                  <form method="POST" action="/client/add">
                   {{ csrf_field() }}
                     <div class="form-group">
                       <label for="first" class="col-form-label">Firstname</label>
@@ -96,11 +96,13 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
-
-
+                   </div>
+              
+            
             @if(session()->get('cart') != null)
+             
                     <form method="POST" action="/card/validate">
+                    {{ csrf_field() }}
                     <table class="table table-hover w-100">
                         <thead>
                             <tr>
@@ -111,19 +113,22 @@
                             </tr>
                         </thead>
                         <tbody>
+
+             <input type="text" name="id_client" value="{{session()->get('client') != null ? session()->get('client')->get(0)->id : '' }}" hidden>
                
-            @foreach (session()->get('cart') as $pro )
-     
+             @foreach (session()->get('cart') as $pro )
+
                 <tr class="align-self-center" class="card_element">
                   <th scope="row" class="w-50 p_name">{{$pro['product']->get(0)->libelle}}</th> 
-                    <input  value="{{$pro['product']->get(0)->id_product}}" hidden>
+                    <input name="id_product" value="{{$pro['product']->get(0)->id_product}}" hidden >
                   <td class="p_prix" >{{$pro['product']->get(0)->prix*$pro['qty']}}</td>
                     <input type="text" class="border rounded w-25 p_price" value="{{$pro['product']->get(0)->prix}}" hidden>
                   <td><p class="w-25 p_qte">{{$pro['qty']}}</p></td>
+                  <input name="qte" value="{{$pro['qty']}}" hidden />
                   <td><button type="button" class="btn btn-danger btn_remove"><a  href="/card/remove/{{$pro['product']->get(0)->id_product}}">Remove</a></button></td>
                 </tr>
 
-            @endforeach
+             @endforeach
          
                         </tbody>
                         <tfoot>
@@ -132,22 +137,32 @@
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col" class="total">{{session()->get('total')}}</th>
+                                <input name="total" value="{{session()->get('total')}}" hidden >
                         </tr> 
                         </tfoot>
                     </table>
                     <div class="modal-footer d-flex justify-content-between">
-                       <p class='checkout_msg'></p>
+                    @if(session('error'))
+                    
+                        <p class="py-1 text-center text-danger font-weight-bold empty">{{session('error')}}</p>
+                      
+                    @endif     
                         <div>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-success valider" onclick="checkout();"><a>Valider</a></button>
+                          <button type="submit" class="btn btn-success valider"><a>Valider</a></button>
                         </div>
-                       
-                    </div>
-                    </from>
-                  @else
+
                     
-                    <p class="py-5 text-center font-weight-bold empty">Your card is empty!</p>
+                    </div>
+                    </form>
+                @else
+                  @if(session('success'))
+                  <p class="py-5 text-center text-success font-weight-bold empty">{{session('success')}}</p>
+                  @else
+                   <p class="py-5 text-center font-weight-bold empty">Your Card is Empty</p>
                   @endif
+                    
+                @endif
                     
                 </div>
 

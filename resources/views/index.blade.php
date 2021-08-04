@@ -19,10 +19,14 @@
 
     <div class="container-fluid">
       <div class="row">
-      <div class="col-12 col-lg-7 py-4  d-flex align-items-center justify-content-center">
+      <div class="col-12 col-lg-7 py-4  text-center">
 
-      <a href="/products/desc" class="text-danger asc mr-3" data-toggle="tooltip" data-placement="top" title="Decroissant"><i class="fas fa-sort-amount-up-alt"></i></a>
-      <a href="/products/asc" class="text-danger desc"><i class="fas fa-sort-amount-down" data-toggle="tooltip" data-placement="top" title="Croissant"></i></a>
+        <p class="py-3 pl-5 text-center product-title text-danger font-weight-bold empty">{{$title}}</p>
+    
+
+        <a href="/products/desc" class="text-danger asc mr-3" data-toggle="tooltip" data-placement="top" title="Decroissant"><i class="fas fa-sort-amount-up-alt"></i></a>
+        <a href="/products/asc" class="text-danger desc"><i class="fas fa-sort-amount-down" data-toggle="tooltip" data-placement="top" title="Croissant"></i></a>
+      
 
       </div>
       </div>
@@ -83,9 +87,12 @@
         </div>
         </div>
     </div>
+{{-- Pagination --}}
+        <div class="d-flex justify-content-center">
+            {!! $products->links() !!}
+        </div>
 
-
-    <div class="container">
+    {{-- <div class="container">
       <div class="row">
         <div class="col-12 col-lg-9 d-flex align-items-center justify-content-center mt-3">
           <nav aria-label="...">
@@ -94,7 +101,7 @@
           </nav>
         </div>
       </div>
-    </div>
+    </div> --}}
 
 
 

@@ -9,6 +9,7 @@ use App\Client as Client;
 class ClientController extends Controller
 {
     public function __construct(Client $client){
+        
         $this->client=$client;
 
     }
